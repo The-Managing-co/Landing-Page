@@ -1,29 +1,33 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Plus_Jakarta_Sans } from 'next/font/google';
+import './globals.css';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// Plus Jakarta Sans is the closest open-source geometric twin to Graphik
+const graphikStyleFont = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-graphik',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "The Managing co",
-  description: "IT Services and SaaS Solutions",
+  title: 'The Managing Co. — IT Services & Proprietary Ventures',
+  description: 'Enterprise IT solutions and proprietary digital ventures.',
+  icons: {
+    icon: '/Whitedotlogo.svg',
+  },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={graphikStyleFont.variable}>
+      <body className="font-sans bg-[#08080a] text-neutral-100 antialiased selection:bg-blue-600 selection:text-white">
+        {children}
+      </body>
     </html>
   );
 }

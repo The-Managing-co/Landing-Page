@@ -1,0 +1,23 @@
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 300 300"
+  width="300"
+  height="300"
+  fill="none"
+>
+  <!-- Row 1 -->
+  <circle cx="78" cy="78" r="28" fill="#1877F2"/>
+  <circle cx="150" cy="78" r="28" fill="#20C5E8"/>
+  <circle cx="222" cy="78" r="28" fill="#FFC400"/>
+
+  <!-- Row 2 -->
+  <circle cx="78" cy="150" r="28" fill="#8247E5"/>
+  <circle cx="150" cy="150" r="28" fill="#FFFFFF"/>
+  <circle cx="222" cy="150" r="28" fill="#FF7900"/>
+
+  <!-- Row 3 -->
+  <circle cx="78" cy="222" r="28" fill="#21C55D"/>
+  <circle cx="150" cy="222" r="28" fill="#76E52E"/>
+  <circle cx="222" cy="222" r="28" fill="#F43F91"/>
+</svg>
