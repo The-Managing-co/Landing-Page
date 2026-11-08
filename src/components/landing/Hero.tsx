@@ -1,47 +1,52 @@
-import React from 'react';
+'use client'
 
-export default function Hero() {
+import React from 'react'
+
+const Hero = () => {
   return (
-    <section className="relative pt-36 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
-      {/* Background Radial Glow */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(37,99,235,0.15),transparent_60%)]" />
-      
-      {/* Decorative Brand Dots (matching reference style) */}
-      <div className="flex justify-center items-center gap-2 mb-6">
-        <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
-        <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
-        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-        <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-        <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
-      </div>
+    <section
+       className="relative flex min-h-screen w-full justify-center overflow-hidden bg-neutral-950 bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: "url('/hero1.png')" }}
+    >
+      {/* bottom fade so the image sinks into black (remove this div if you don't want it) */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2
+       bg-gradient-to-t from-black via-black/50 to-transparent" />
 
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.08]">
-          Software to power <br className="hidden sm:inline" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300">
-            your next venture
-          </span>
+      <div className="relative z-10 flex flex-col items-center px-5 pt-[28vh] text-center">
+        {/* badge */}
+        <span className="inline-flex items-center gap-2 rounded-md bg-black/30 px-2.5 py-1 text-xs text-white/80 backdrop-blur-sm">
+          <span className="h-1.5 w-1.5 rounded-full bg-teal-400" />
+          The New Way to Demo
+        </span>
+
+        {/* heading */}
+        <h1 className="mt-5 max-w-xl text-balance text-4xl font-medium leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl">
+          Run Conversational Product Demos, 24/7
         </h1>
 
-        <p className="mt-6 text-base sm:text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto font-normal leading-relaxed">
-          The Managing Co. engineers high-performance enterprise IT systems and builds proprietary software products built for scale.
+        {/* subtext */}
+        <p className="mt-4 max-w-md text-sm text-white/70 md:max-w-lg md:text-base">
+          Hobbes gives buyers a guided demo the moment they are ready. No scheduling required.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="#products"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm tracking-wide transition-all shadow-[0_0_25px_rgba(37,99,235,0.4)]"
+        {/* buttons */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <button
+            type="button"
+            className="rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:bg-white/90"
           >
-            Explore Our Products
-          </a>
-          <a
-            href="#services"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-300 hover:text-white font-medium text-sm tracking-wide transition-all"
+            Start Demo
+          </button>
+          <button
+            type="button"
+            className="rounded-full bg-neutral-700/70 px-5 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-neutral-700"
           >
-            Our IT Services
-          </a>
+            Talk to Sales
+          </button>
         </div>
       </div>
     </section>
-  );
+  )
 }
+
+export default Hero
