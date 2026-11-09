@@ -1,6 +1,7 @@
 import Navbar from '../components/landing/Navbar';
 import Hero from '../components/landing/Hero';
 import CommingSoon from '../components/landing/Commingsoon';
+import Ctc from '../components/landing/Ctc';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       {/* <CommingSoon/> */}
+      <Ctc/>
     </main>
   );
 }
