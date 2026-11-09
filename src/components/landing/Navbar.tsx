@@ -59,10 +59,10 @@ const Navbar = () => {
           aria-label="Hobbes home"
         >
           <Image
-            src="/logo.svg"
-            alt="Hobbes"
-            width={150}
-            height={24}
+            src="/logo.png"
+            alt="The Managing Co"
+            width={220}
+            height={84}
             priority
      
           />

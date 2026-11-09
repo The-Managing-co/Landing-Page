@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Plus_Jakarta_Sans, Geist } from 'next/font/google';
 import './globals.css';
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+
 
 // Plus Jakarta Sans is the closest open-source geometric twin to Graphik
 const graphikStyleFont = Plus_Jakarta_Sans({
@@ -14,7 +18,7 @@ export const metadata: Metadata = {
   title: 'The Managing Co. — IT Services & Proprietary Ventures',
   description: 'Enterprise IT solutions and proprietary digital ventures.',
   icons: {
-    icon: '/Whitedotlogo.svg',
+    icon: 'public/icon.png',
   },
 };
 
@@ -24,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={graphikStyleFont.variable}>
+    <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className="font-sans bg-[#08080a] text-neutral-100 antialiased selection:bg-blue-600 selection:text-white">
         {children}
       </body>
