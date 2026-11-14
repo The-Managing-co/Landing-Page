@@ -1,149 +1,134 @@
 'use client';
 
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const links = [
-  { label: 'Home', href: '#features' },
-  { label: 'About', href: '#outcomes' },
-  { label: 'Services', href: '#how-it-works' },
-  { label: 'Clients', href: '#use-cases' },
+const navLinks = [
+  { label: 'Platform', href: '#platform' },
+  { label: 'Resources', href: '#resources' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Careers', href: '#careers' },
 ];
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Close the mobile menu on Escape and lock body scroll while open
   useEffect(() => {
-    if (!open) return;
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
     };
-
-    document.addEventListener('keydown', onKeyDown);
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.removeEventListener('keydown', onKeyDown);
-      document.body.style.overflow = '';
-    };
-  }, [open]);
-
-  const closeMenu = () => setOpen(false);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-20">
-      <nav className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:grid lg:grid-cols-3 lg:px-8">
-        {/* left: links (desktop only) */}
-        <ul className="hidden items-center gap-8 lg:flex">
-          {links.map((link) => (
-            <li key={link.label}>
-              <a
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-[#020617]/80 backdrop-blur-md border-b border-white/10 py-3 shadow-lg shadow-black/20'
+          : 'bg-transparent py-5'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-11">
+          
+          {/* Left: Antimetal Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            {/* Antimetal Signature Dot Cluster / Constellation Icon */}
+            <div className="relative w-6 h-6 flex items-center justify-center">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" className="text-white group-hover:text-lime-300 transition-colors">
+                <circle cx="5" cy="12" r="1.8" />
+                <circle cx="9" cy="8" r="1.8" />
+                <circle cx="9" cy="16" r="1.8" />
+                <circle cx="13" cy="5" r="1.8" />
+                <circle cx="13" cy="12" r="2.2" />
+                <circle cx="13" cy="19" r="1.8" />
+                <circle cx="18" cy="12" r="1.8" />
+              </svg>
+            </div>
+            <span className="text-lg font-semibold tracking-tight text-white group-hover:text-gray-200 transition-colors">
+              Antimetal
+            </span>
+          </Link>
+
+          {/* Center: Navigation Links */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-white/80 transition hover:text-white"
+                className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               >
                 {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+              </Link>
+            ))}
+          </nav>
 
-        {/* center: logo */}
-        <Link
-          href="/"
-          onClick={closeMenu}
-          className="flex shrink-0 items-center lg:justify-self-center"
-          aria-label="Hobbes home"
-        >
-          <Image
-            src="/logo.png"
-            alt="The Managing Co"
-            width={220}
-            height={84}
-            priority
-     
-          />
-        </Link>
+          {/* Right: Auth & CTA */}
+          <div className="hidden md:flex items-center gap-5">
+            <Link
+              href="#login"
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+            >
+              Log in
+            </Link>
+            <Link
+              href="#demo"
+              className="px-4 py-2 rounded-full text-xs font-semibold tracking-wide text-white border border-white/20 bg-white/[0.06] hover:bg-white/15 backdrop-blur-sm transition-all duration-200 active:scale-95 shadow-sm"
+            >
+              Book a demo
+            </Link>
+          </div>
 
-        {/* right: buttons */}
-        <div className="flex items-center justify-end gap-2 sm:gap-3">
-          <button
-            type="button"
-            className="hidden h-10 items-center justify-center rounded-full bg-neutral-700/70 px-5 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-neutral-700 md:inline-flex"
-          >
-            Products
-          </button>
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
 
-          <button
-            type="button"
-            className="inline-flex h-10 items-center justify-center rounded-full bg-white px-4 text-sm font-medium text-black transition hover:bg-white/90 sm:px-5"
-          >
-            Start Demo
-          </button>
-
-          {/* hamburger (mobile + tablet) */}
-          <button
-            type="button"
-            onClick={() => setOpen((prev) => !prev)}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-700/70 text-white backdrop-blur-sm transition hover:bg-neutral-700 lg:hidden"
-          >
-            {open ? (
-              <X className="h-5 w-5" aria-hidden="true" />
-            ) : (
-              <Menu className="h-5 w-5" aria-hidden="true" />
-            )}
-          </button>
         </div>
-      </nav>
+      </div>
 
-      {/* mobile + tablet menu */}
-      {open && (
-        <>
-          {/* backdrop: tap outside to close */}
-          <div
-            className="fixed inset-0 top-16 z-10 bg-black/40 lg:hidden"
-            onClick={closeMenu}
-            aria-hidden="true"
-          />
-
-          <div
-            id="mobile-menu"
-            className="relative z-20 mx-4 mt-1 rounded-2xl bg-black/70 p-5 backdrop-blur-md sm:mx-6 lg:hidden"
-          >
-            <ul className="flex flex-col divide-y divide-white/10">
-              {links.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    onClick={closeMenu}
-                    className="block py-3 text-base font-medium text-white/80 transition hover:text-white"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-4 flex flex-col gap-3 sm:hidden">
-              <button
-                type="button"
-                onClick={closeMenu}
-                className="h-11 w-full rounded-full bg-neutral-700/70 text-sm font-medium text-white transition hover:bg-neutral-700"
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden px-4 pt-3 pb-6 bg-[#020617]/95 backdrop-blur-xl border-b border-white/10 shadow-2xl transition-all">
+          <div className="flex flex-col space-y-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-3 py-2 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
               >
-                Talk to Sales
-              </button>
+                {link.label}
+              </Link>
+            ))}
+            <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5">
+              <Link
+                href="#login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-center py-2 text-sm font-medium text-gray-300 hover:text-white"
+              >
+                Log in
+              </Link>
+              <Link
+                href="#demo"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-center py-2 rounded-full text-xs font-semibold text-black bg-[#d4ff32] hover:bg-[#c2f022] shadow transition-colors"
+              >
+                Book a demo
+              </Link>
             </div>
           </div>
-        </>
+        </div>
       )}
     </header>
   );
-};
-
-export default Navbar;
+}

@@ -1,24 +1,23 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, Geist } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-
-// Plus Jakarta Sans is the closest open-source geometric twin to Graphik
-const graphikStyleFont = Plus_Jakarta_Sans({
+const geistSans = Geist({
+  variable: '--font-sans',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-graphik',
-  display: 'swap',
+});
+
+const geistMono = Geist_Mono({
+  variable: '--font-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: 'The Managing Co. — IT Services & Proprietary Ventures',
-  description: 'Enterprise IT solutions and proprietary digital ventures.',
+  title: 'Antimetal — Handle everything that happens after you deploy',
+  description: 'AI that investigates, fixes, and prevents issues by connecting your cloud platforms, observability tools, and code.',
   icons: {
-    icon: 'public/icon.png',
+    icon: '/logo.png',
   },
 };
 
@@ -28,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body className="font-sans bg-[#08080a] text-neutral-100 antialiased selection:bg-blue-600 selection:text-white">
+    <html lang="en" className={cn(geistSans.variable, geistMono.variable, "dark")}>
+      <body className="font-sans antialiased bg-[#020617] text-neutral-100 selection:bg-cyan-500 selection:text-black">
         {children}
       </body>
     </html>
